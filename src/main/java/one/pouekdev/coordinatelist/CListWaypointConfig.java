@@ -42,13 +42,13 @@ public class CListWaypointConfig extends Screen {
         this.waypoint_color.setText(CListClient.variables.colors.get(id).rgbToHexNoAlpha());
         this.x = new TextFieldWidget(textRenderer, 0, 0, 50, 20, Text.literal(""));
         this.x.setFocusUnlocked(true);
-        this.x.setText(String.valueOf(waypoint.getX()));
+        this.x.setText(String.valueOf(waypoint.x));
         this.y = new TextFieldWidget(textRenderer, 0, 0, 50, 20, Text.literal(""));
         this.y.setFocusUnlocked(true);
-        this.y.setText(String.valueOf(waypoint.getY()));
+        this.y.setText(String.valueOf(waypoint.y));
         this.z = new TextFieldWidget(textRenderer, 0, 0, 50, 20, Text.literal(""));
         this.z.setFocusUnlocked(true);
-        this.z.setText(String.valueOf(waypoint.getZ()));
+        this.z.setText(String.valueOf(waypoint.z));
         gridWidget.refreshPositions();
         SimplePositioningWidget.setPos(gridWidget, 0, 0, this.width, this.height, 0.5f, 1f);
         gridWidget.forEachChild(this::addDrawableChild);
@@ -97,19 +97,19 @@ public class CListWaypointConfig extends Screen {
         }
         if(this.x.isFocused()){
             try{
-                waypoint.setX(x.getText());
+                waypoint.x = Integer.parseInt(x.getText());
             }
             catch(IndexOutOfBoundsException ignored){}
         }
         if(this.y.isFocused()){
             try{
-                waypoint.setY(y.getText());
+                waypoint.y = Integer.parseInt(y.getText());
             }
             catch(IndexOutOfBoundsException ignored){}
         }
         if(this.z.isFocused()){
             try{
-                waypoint.setZ(z.getText());
+                waypoint.z = Integer.parseInt(z.getText());
             }
             catch(IndexOutOfBoundsException ignored){}
         }
@@ -127,13 +127,13 @@ public class CListWaypointConfig extends Screen {
                 CListClient.variables.colors.get(id).hexToRGB(waypoint_color.getText());
             }
             if(this.x.isFocused()){
-                waypoint.setX(x.getText());
+                waypoint.x = Integer.parseInt(x.getText());
             }
             if(this.y.isFocused()){
-                waypoint.setY(y.getText());
+                waypoint.y = Integer.parseInt(y.getText());
             }
             if(this.z.isFocused()){
-                waypoint.setZ(z.getText());
+                waypoint.z = Integer.parseInt(z.getText());
             }
             CListClient.variables.saved_since_last_update = false;
         }
@@ -145,13 +145,13 @@ public class CListWaypointConfig extends Screen {
                 CListClient.variables.colors.get(id).hexToRGB(waypoint_color.getText());
             }
             if(this.x.isFocused()){
-                waypoint.setX(x.getText());
+                waypoint.x = Integer.parseInt(x.getText());
             }
             if(this.y.isFocused()){
-                waypoint.setY(y.getText());
+                waypoint.y = Integer.parseInt(y.getText());
             }
             if(this.z.isFocused()){
-                waypoint.setZ(z.getText());
+                waypoint.z = Integer.parseInt(z.getText());
             }
             CListClient.variables.saved_since_last_update = false;
         }

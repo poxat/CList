@@ -44,18 +44,18 @@ public class CListClient implements ClientModInitializer {
         return 15f * (CListConfig.multiplier/10.0f);
     }
     public float distanceTo(CListWaypoint waypoint) {
-        float f = (float)(CListVariables.minecraft_client.player.getX() - waypoint.getX());
-        float g = (float)(CListVariables.minecraft_client.player.getY() - waypoint.getY());
-        float h = (float)(CListVariables.minecraft_client.player.getZ() - waypoint.getZ());
+        float f = (float)(CListVariables.minecraft_client.player.getX() - waypoint.x);
+        float g = (float)(CListVariables.minecraft_client.player.getY() - waypoint.y);
+        float h = (float)(CListVariables.minecraft_client.player.getZ() - waypoint.z);
         return Math.round(MathHelper.sqrt(f * f + g * g + h * h));
     }
     public Vec3d calculateRenderCoords(CListWaypoint waypoint, Camera camera, float distance) {
         float px = (float)camera.getPos().x;
         float py = (float)camera.getPos().y;
         float pz = (float)camera.getPos().z;
-        float wx = waypoint.getX();
-        float wy = waypoint.getY();
-        float wz = waypoint.getZ();
+        float wx = waypoint.x;
+        float wy = waypoint.y;
+        float wz = waypoint.z;
         float vx = wx - px;
         float vy = wy - py;
         float vz = wz - pz;
@@ -184,7 +184,7 @@ public class CListClient implements ClientModInitializer {
             while(add_a_waypoint.wasPressed()){
                 if(!Objects.equals(client.currentScreen, new CListWaypointScreen(Text.literal("Waypoints")))){
                     PlayerEntity player = CListVariables.minecraft_client.player;
-                    addNewWaypoint("X: "+Math.round(player.getX())+" Y: "+Math.round(player.getY())+" Z: "+Math.round(player.getZ()),false);
+                    addNewWaypoint((int) Math.round(player.getX()), (int) Math.round(player.getY()), (int) Math.round(player.getZ()),false);
                 }
             }
             while(toggle_visibility.wasPressed()){
@@ -213,7 +213,7 @@ public class CListClient implements ClientModInitializer {
                         }
                         if(!client.player.isAlive() && !variables.had_death_waypoint_placed && CListConfig.can_place_deathpoints){
                             PlayerEntity player = client.player;
-                            addNewWaypoint("X: "+Math.round(player.getX())+" Y: "+Math.round(player.getY())+" Z: "+Math.round(player.getZ()),true);
+                            addNewWaypoint((int) Math.round(player.getX()), (int) Math.round(player.getY()), (int) Math.round(player.getZ()),true);
                             variables.had_death_waypoint_placed = true;
                         } else if (client.player.isAlive() && variables.had_death_waypoint_placed) {
                             variables.had_death_waypoint_placed = false;
@@ -229,7 +229,7 @@ public class CListClient implements ClientModInitializer {
         variables.saved_since_last_update = true;
         variables.loaded_last_world = false;
     }
-    public static void addNewWaypoint(String name, boolean death){
+    public static void addNewWaypoint(int x, int y, int z, boolean death){
         CList.LOGGER.info("New waypoint for dimension " + variables.last_world.getDimension().effects());
         String waypoint_name;
         if(death){
@@ -238,7 +238,7 @@ public class CListClient implements ClientModInitializer {
         else{
             waypoint_name = (Text.translatable("waypoint.new.waypoint")).getString();
         }
-        variables.waypoints.add(new CListWaypoint(name,waypoint_name,String.valueOf(variables.last_world.getDimension().effects()),true,death));
+        variables.waypoints.add(new CListWaypoint(x,y,z,waypoint_name,String.valueOf(variables.last_world.getDimension().effects()),true,death));
         variables.colors.add(new CListWaypointColor(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
         variables.saved_since_last_update = false;
         if(!death){

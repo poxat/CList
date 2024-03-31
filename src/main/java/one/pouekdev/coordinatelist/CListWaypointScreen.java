@@ -33,13 +33,13 @@ public class CListWaypointScreen extends Screen {
         GridWidget.Adder adderBottom = gridWidgetBottom.createAdder(2);
         adder.add(ButtonWidget.builder(Text.translatable("buttons.add.new.waypoint"), button -> {
             PlayerEntity player = CListVariables.minecraft_client.player;
-            CListClient.addNewWaypoint("X: "+Math.round(player.getX())+" Y: "+Math.round(player.getY())+" Z: "+Math.round(player.getZ()),false);
+            CListClient.addNewWaypoint((int) Math.round(player.getX()), (int) Math.round(player.getY()), (int) Math.round(player.getZ()),false);
             list.RefreshElements();
         }).width(300).build(),2, gridWidget.copyPositioner().marginTop(10));
         copy_coordinates_button = ButtonWidget.builder(Text.literal("---"), button -> {
             long window = CListVariables.minecraft_client.getWindow().getHandle();
             CListWaypoint waypoint = CListClient.variables.waypoints.get(selected_waypoint_id);
-            GLFW.glfwSetClipboardString(window, waypoint.getX() + " " + waypoint.getY() + " " + waypoint.getZ());
+            GLFW.glfwSetClipboardString(window, waypoint.x + " " + waypoint.y + " " + waypoint.z);
         }).width(150).build();
         copy_coordinates_button.setTooltip(Tooltip.of(Text.translatable("tooltip.copy.waypoint.coordinates")));
         edit_waypoint_button = ButtonWidget.builder(Text.translatable("selectWorld.edit"), button -> CListVariables.minecraft_client.setScreen(new CListWaypointConfig(Text.literal("Config"),selected_waypoint_id))).width(150).build();
@@ -163,12 +163,12 @@ public class CListWaypointScreen extends Screen {
                     CListClient.variables.waypoints.get(id).toggleVisibility();
                     selected_waypoint_id = id;
                     CListWaypoint waypoint = CListClient.variables.waypoints.get(selected_waypoint_id);
-                    copy_coordinates_button.setMessage(Text.literal(waypoint.getX() + " " + waypoint.getY() + " " + waypoint.getZ()));
+                    copy_coordinates_button.setMessage(Text.literal(waypoint.x + " " + waypoint.y + " " + waypoint.z));
                 }, id);
                 this.select = new InvisibleButton(0, 0, 240, 25, button -> {
                     selected_waypoint_id = id;
                     CListWaypoint waypoint = CListClient.variables.waypoints.get(selected_waypoint_id);
-                    copy_coordinates_button.setMessage(Text.literal(waypoint.getX() + " " + waypoint.getY() + " " + waypoint.getZ()));
+                    copy_coordinates_button.setMessage(Text.literal(waypoint.x + " " + waypoint.y + " " + waypoint.z));
                 });
                 this.children = Lists.newArrayList();
                 this.children.add(sh);
