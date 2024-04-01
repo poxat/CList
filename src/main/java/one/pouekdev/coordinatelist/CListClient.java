@@ -208,8 +208,13 @@ public class CListClient implements ClientModInitializer {
                         if (client.isInSingleplayer()) {
                             variables.worldName = client.getServer().getSaveProperties().getLevelName();
                         } else {
-                            variables.worldName = client.getCurrentServerEntry().address;
-                            variables.worldName = variables.worldName.replace(":","P");
+                            if(client.getCurrentServerEntry().isRealm()) {
+                                variables.worldName = client.getCurrentServerEntry().name;
+                            }
+                            else {
+                                variables.worldName = client.getCurrentServerEntry().address;
+                                variables.worldName = variables.worldName.replace(":","P");
+                            }
                         }
                         if(!client.player.isAlive() && !variables.had_death_waypoint_placed && CListConfig.can_place_deathpoints){
                             PlayerEntity player = client.player;
