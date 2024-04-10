@@ -1,8 +1,8 @@
 {
   "keybinds.category.name": "Сочетания Клавиш CList",
-  "keybinds.waypoint.add": "Добавить путевую точку в текущей позиции",
-  "keybinds.waypoints.menu": "Открыть меню путевых точек",
+  "keybinds.waypoint.add": "Добавить метку в текущей позиции",
+  "keybinds.waypoints.menu": "Открыть меню меток",
   "waypoint.last.death": "Последняя смерть",
-  "waypoint.new.waypoint": "Новая Путевая Точка",
-  "buttons.add.new.waypoint": "Создать новую путевую точку в текущей позиции"
+  "waypoint.new.waypoint": "Новая метка",
+  "buttons.add.new.waypoint": "Создать новую метку в текущей позиции"
 }
